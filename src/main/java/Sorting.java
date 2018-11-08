@@ -33,7 +33,16 @@ public class Sorting {
      */
     @SuppressWarnings("unused")
     private static int[] bubbleSort(final int[] array) {
-        return null;
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 1; j < array.length - i; j++) {
+                if (array[j - 1] > array[j]) {
+                    int temp = array[j - 1];
+                    array[j - 1] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+        return array;
     }
 
     /**
@@ -44,7 +53,17 @@ public class Sorting {
      */
     @SuppressWarnings("unused")
     private static int[] selectionSort(final int[] array) {
-        return null;
+        for (int i = 0; i < array.length; i++) {
+            int min = array[i];
+            for (int j = i + 1; j < array.length - i; j++) {
+                if (array[j] < array[i]) {
+                    final int temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+        return array;
     }
 
     /**
@@ -55,7 +74,29 @@ public class Sorting {
      */
     @SuppressWarnings("unused")
     private static int[] mergeSort(final int[] array) {
-        return null;
+        int mid = array.length / 2;
+        if (array.length == 1) {
+            return array;
+        } else if (array.length == 2) {
+            if (array[0] > array[1]) {
+                int[] newArray = new int[array.length];
+                newArray[1] = array[0];
+                newArray[0] = array[1];
+                return newArray;
+            }
+            return array;
+        } else {
+            int[] array1 = new int[mid];
+            int[] array2 = new int[mid];
+            for (int i = 0; i < mid; i++) {
+                array1[i] = array[i];
+                array2[i] = array[i + mid];
+            }
+            int[] sortedArray1 = mergeSort(array1);
+            int[] sortedArray2 = mergeSort(array2);
+            int[] sortedArray = merge(sortedArray1, sortedArray2);
+            return sortedArray;
+        }
     }
 
     /**
